@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>Download PDFs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="pdf-name" placeholder="Enter Application Number">
+   <br> <button id="download-button">Download</button>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const pdfBaseUrl = 'pdfs/';
+    const pdfExtension = '.pdf';
+    
+    document.getElementById('download-button').addEventListener('click', () => {
+        const pdfName = document.getElementById('pdf-name').value.trim();
+        
+        if (pdfName) {
+            const pdfUrl = `${pdfBaseUrl}${pdfName}${pdfExtension}`;
+            const link = document.createElement('a');
+            link.href = pdfUrl;
+            link.download = `${pdfName}${pdfExtension}`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } else {
+            alert('Please enter a PDF name.');
+        }
+    });
+});
+    </script>
+</body>
+</html>
